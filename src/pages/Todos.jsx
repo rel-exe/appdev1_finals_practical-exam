@@ -1,24 +1,23 @@
-import { useEffect } from "react"
-import { useDispatch, useSelector } from "react-redux"
-import { fetchTodos } from "../features/todos/todosSlice"
-import AddTodoForm from "../components/AddTodoForm"
-import TodoList from "../components/TodoList"
+// src/pages/Todos.jsx
+import DateTime from "../components/DateTime";
+import AddTodoForm from "../components/AddTodoForm";
+import TodoList from "../components/TodoList";
+import ThemeSwitcher from "../components/ThemeSwitcher";
+import GitHubCorner from "../components/GithubCorner"
 
-function Todos () {
-    const dispatch = useDispatch()
-    const todos = useSelector(state => state.todos.items)
-
-    useEffect(() => {
-        dispatch(fetchTodos())
-    }, [dispatch])
-
-    return (
-        <div>
-            <h1>Todos</h1>
-            <AddTodoForm />
-            <TodoList todos={todos} />
-        </div>
-    )
+function Todos() {
+  return (
+    <div>
+      <header id="header">
+        <ThemeSwitcher />
+        <GitHubCorner url="https://github.com/Lordwill1/todo-list" />
+        <h1 id="title">Just do it.</h1>
+      </header>
+      <AddTodoForm />
+      <DateTime />
+      <TodoList />
+    </div>
+  );
 }
 
-export default Todos
+export default Todos;
