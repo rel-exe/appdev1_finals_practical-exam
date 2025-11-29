@@ -6,8 +6,7 @@ function Login () {
     const [users, setUsers] = useState([])
 
     const SECRET = import.meta.env.VITE_APP_SECRET_PASSWORD
-
-    useEffect(() => {
+useEffect(() => {
         fetch("https://jsonplaceholder.typicode.com/users?_limit=2")
         .then(response => response.json())
         .then(data => setUsers(data))
