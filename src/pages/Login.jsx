@@ -32,13 +32,31 @@ function Login() {
   }
 
   return (
-    <div>
-      <h2>Login</h2>
-      <input type="text" placeholder="Enter username (E.g., Bret)" value={username} onChange={e => setUsername(e.target.value)} />
-      <br />
-      <input type="password" placeholder="Enter password" value={password} onChange={e => setPassword(e.target.value)} />
-      <br />
-      <button onClick={handleLogin}>Login</button>
+    <div id="login-container" style={{ display: "flex", flexDirection: "column", alignItems: "center", marginTop: "50px" }}>
+      <h2 id="login-title">Login</h2>
+      <input
+        className="standard-input"
+        type="text"
+        placeholder="Enter username (E.g., Bret)"
+        value={username}
+        onChange={e => setUsername(e.target.value)}
+        style={{ margin: "10px 0", padding: "10px", width: "250px" }}
+      />
+      <input
+        className="standard-input"
+        type="password"
+        placeholder="Enter password"
+        value={password}
+        onChange={e => setPassword(e.target.value)}
+        style={{ margin: "10px 0", padding: "10px", width: "250px" }}
+      />
+      <button
+        className="standard-button"
+        onClick={handleLogin}
+        style={{ padding: "10px 20px", marginTop: "10px" }}
+      >
+        Login
+      </button>
     </div>
   );
 }
