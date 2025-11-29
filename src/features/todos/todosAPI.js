@@ -1,29 +1,37 @@
-export const getTodosAPI = function () {
-    return fetch(`https://jsonplaceholder.typicode.com/todos?_limit=10`)
-    .then(res => res.json())
-}
-export const addTodoAPI = function (todo) {
-    return fetch(`https://jsonplaceholder.typicode.com/todos`, {
-        method: "POST",
-        body: JSON.stringify(todo),
-        headers: { "Content-Type": "application/json" }
-    })
-    .then(res => res.json())
-}
+import axios from "axios";
 
-export const updateTodoAPI = function(todo) {
-    return fetch(`https://jsonplaceholder.typicode.com/todos/${todo.id}`, {
-        method: "PUT",
-        body: JSON.stringify(todo),
-        headers: { "Content-Type": "application/json" }
-    })
-    .then(res => res.json())
-}
+const API_URL = import.meta.env.VITE_APP_API_URL;
 
-export const deleteTodoAPI = function(id) {
-    return fetch(`https://jsonplaceholder.typicode.com/todos/${id}`, {
-        method: "DELETE"
-    })
-    .then(() => id)
-}
+export const getTodosAPI = async () => {
+  const response = await axios.get(`${API_URL}/todos?_limit=10`);
+  return response.data;
+};
 
+export const addTodoAPI = async (todo) => {
+  try {
+    const response = await axios.post(`${API_URL}/todos`, todo);
+    return response.data;
+  } catch (error) {
+    return { ...todo, id: Date.now() };
+  }
+};
+
+export const updateTodoAPI = async (todo) => {
+  if (todo.id > 200) return todo;
+  try {
+    const response = await axios.put(`${API_URL}/todos/${todo.id}`, todo);
+    return response.data;
+  } catch (error) {
+    return todo;
+  }
+};
+
+export const deleteTodoAPI = async (id) => {
+  if (id > 200) return id;
+  try {
+    await axios.delete(`${API_URL}/todos/${id}`);
+    return id;
+  } catch (error) {
+    return id;
+  }
+};
